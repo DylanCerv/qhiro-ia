@@ -9,14 +9,22 @@ class SoilNutrients(BaseModel):
     potassium: float
 
 
+class GeoPoint(BaseModel):
+    lat: float
+    lng: float
+
+
 class AnalysisRequest(BaseModel):
     parcelId: str
     zoneId: str
     ndvi: float = Field(ge=0.0, le=1.0)
     soilNutrients: SoilNutrients
     soilMoisture: float
-    cropType: str
+    cropType: str = "unknown"
     timestamp: str
+    imageUrl: str | None = None
+    imageBase64: str | None = None
+    coordinates: list[GeoPoint] | None = None
 
 
 class AnalysisResponse(BaseModel):
@@ -25,3 +33,4 @@ class AnalysisResponse(BaseModel):
     recommendedNpkFormula: SoilNutrients
     recommendedAction: Literal["none", "monitor", "injection", "emergency"]
     explanation: str
+    affectedCoordinates: list[GeoPoint] | None = None
