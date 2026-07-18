@@ -5,8 +5,8 @@ from openai import OpenAI
 
 from app.models import AnalysisRequest, AnalysisResponse
 
-SYSTEM_PROMPT = """You are an agricultural AI analyst for Qhiro Symbiotic.
-Analyze crop health data and respond ONLY with valid JSON matching this schema:
+SYSTEM_PROMPT = """Eres un analista agrícola de Qhiro Symbiotic.
+Analiza el estado del cultivo y responde SOLO con JSON válido que siga exactamente este esquema:
 {
   "diagnosis": "string",
   "severity": 0.0-1.0,
@@ -15,10 +15,10 @@ Analyze crop health data and respond ONLY with valid JSON matching this schema:
   "explanation": "string",
   "affectedCoordinates": [{"lat": number, "lng": number}] | null
 }
-Base severity on NDVI, soil nutrients, moisture, crop type, field coordinates, and crop imagery when provided.
-If an image is provided, inspect it for visible crop stress, pests, disease, nutrient deficiency, drought stress, or healthy growth.
-Do not invent exact field coordinates; only return coordinates that are provided in the request or null.
-All text must be in English."""
+Base la severidad en NDVI, nutrientes del suelo, humedad, tipo de cultivo, coordenadas del campo e imagen del cultivo cuando esté disponible.
+Si se proporciona una imagen, inspecciónala para detectar estrés visible, plagas, enfermedades, deficiencia nutricional, sequía o crecimiento saludable.
+No inventes coordenadas exactas del campo; solo devuelve coordenadas que ya vengan en la petición o null.
+Todo el texto debe estar en español."""
 
 
 def analyze_crop(payload: AnalysisRequest) -> AnalysisResponse:

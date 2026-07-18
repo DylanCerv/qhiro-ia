@@ -1,6 +1,6 @@
 # qhiro-backend-ia
 
-Servicio de IA agrícola de Qhiro Symbiotic. Recibe datos del cultivo desde el backend operativo y devuelve una decisión estructurada para que el backend pueda generar alertas, reportes y acciones.
+Servicio de IA agrícola de Qhiro Symbiotic. Recibe datos del cultivo desde el backend operativo y devuelve una decisión estructurada en español para que el backend pueda generar alertas, reportes y acciones. Los títulos del PDF y el texto visible al usuario también salen en español.
 
 ## Qué Hace
 
@@ -27,6 +27,8 @@ Esto permite cambiar modelos, prompts o proveedores de IA sin romper la API prin
 `OPENAI_API_KEY` es obligatoria. No hay reglas locales ni fallback determinístico para decisiones agronómicas.
 
 Si falta la clave, `/analyze` responde `503` para evitar que el sistema actúe con datos inventados o reglas no validadas.
+
+La IA debe responder en español: diagnóstico, explicación y cualquier texto visible para el usuario deben salir en español, aunque el JSON siga siendo el mismo.
 
 ## Variables de Entorno
 
@@ -106,7 +108,7 @@ Respuesta:
 
 ```json
 {
-  "diagnosis": "Crop stress detected in the provided image and telemetry.",
+  "diagnosis": "Se detectó estrés en el cultivo a partir de la imagen y la telemetría.",
   "severity": 0.72,
   "recommendedNpkFormula": {
     "nitrogen": 42,
@@ -114,7 +116,7 @@ Respuesta:
     "potassium": 40
   },
   "recommendedAction": "injection",
-  "explanation": "NDVI and visible stress suggest nutrient intervention.",
+  "explanation": "El NDVI y el estrés visible sugieren una intervención nutricional.",
   "affectedCoordinates": [{ "lat": -0.1807, "lng": -78.4678 }]
 }
 ```
